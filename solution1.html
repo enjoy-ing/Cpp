@@ -117,14 +117,38 @@
 <body>
     <h1>Solution 1</h1>
     <p>
-        This is the content of the first solution page. Below is an example of a code snippet with a "Click to Copy" feature. You can use this functionality to allow users to easily copy code or text.
+        Here is the Code. Enjoy! (Do practice and understand them)
     </p>
 
     <div class="code-container">
         <pre id="codeSnippet">
-// Example JavaScript Function
-function greet(name) {
-    return `Hello, ${name}!`;
+#include <iostream>
+using namespace std;
+int main(){
+    char A[26];
+    int N[26];
+    for(int i=0;i<26;i++)
+    {
+        A[i]='a'+i;
+        N[i]=0;
+    }
+    char c; cin>>c;
+    while(c!='.')
+    {
+        for(int j=0;j<26;j++) {
+        if(c==A[j]){ N[j]++; 
+        break;  }
+        }
+        cin>>c;
+    }
+    int max=0;
+    int i;
+    for(i=0;i<26;i++)
+    {
+        if(N[i]>N[max]) max=i;
+    }
+    cout<<A[max]<<" "<<N[max]<<endl;
+    return 0;
 }
 
 console.log(greet('World'));
