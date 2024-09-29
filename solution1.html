@@ -38,9 +38,9 @@
             padding: 15px;
             border-radius: 5px;
             text-align: left;
-            overflow-x: auto;
-            max-width: 90%;
-            margin-top: 5px;
+            overflow-x: auto; /* Allows horizontal scrolling */
+            max-width: 90%;   /* Limit the width of the code box to 90% of the screen */
+            white-space: pre; /* Preserve the formatting of the code */
         }
 
         .copy-btn {
@@ -110,7 +110,7 @@
 <body>
     <h1>Solution 1</h1>
     <p>
-        This is the content .
+        This is the content of the first solution page. Below is an example of a code snippet with a "Click to Copy" feature. You can use this functionality to allow users to easily copy code or text.
     </p>
 
     <div class="code-container">
@@ -120,36 +120,17 @@
 
         <!-- Code Snippet -->
         <pre id="codeSnippet">
-#include <iostream>
-using namespace std;
-int main(){
-    char A[26];
-    int N[26];
-    for(int i=0;i<26;i++)
-    {
-        A[i]='a'+i;
-        N[i]=0;
-    }
-    char c; cin>>c;
-    while(c!='.')
-    {
-        for(int j=0;j<26;j++) {
-        if(c==A[j]){ N[j]++; 
-        break;  }
-        }
-        cin>>c;
-    }
-    int max=0;
-    int i;
-    for(i=0;i<26;i++)
-    {
-        if(N[i]>N[max]) max=i;
-    }
-    cout<<A[max]<<" "<<N[max]<<endl;
-    return 0;
+// Example JavaScript Function
+function greet(name) {
+    return `Hello, ${name}!`;
 }
 
 console.log(greet('World'));
+
+// More example code
+for (let i = 0; i < 100; i++) {
+    console.log("This is a long line of code that could potentially overflow and needs to be properly handled by the CSS for scrolling.");
+}
         </pre>
     </div>
 
