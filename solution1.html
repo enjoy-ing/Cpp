@@ -16,17 +16,52 @@
 
         h1 {
             color: #333;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
 
         p {
             font-size: 18px;
             color: #555;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+        }
+
+        .code-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background-color: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            overflow-x: auto;
+            max-width: 90%;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .copy-btn:hover {
+            background-color: #45a049;
         }
 
         a {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 16px;
             text-decoration: none;
             color: #0066cc;
@@ -35,13 +70,112 @@
         a:hover {
             color: #ff6600;
         }
+
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the button */
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        /* Tooltip arrow */
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* At the bottom of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        /* Show the tooltip when hovering */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <h1>Solution 1</h1>
-    <p>This is the content of the first solution page. You can describe the solution here.</p>
+    <p>
+        This is the content of the first solution page. Below is an example of a code snippet with a "Click to Copy" feature. You can use this functionality to allow users to easily copy code or text.
+    </p>
+
+    <div class="code-container">
+        <pre id="codeSnippet">
+// Example JavaScript Function
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+console.log(greet('World'));
+        </pre>
+        <button class="copy-btn tooltip" onclick="copyToClipboard()">Copy</button>
+        <span class="tooltiptext" id="tooltipText">Copied!</span>
+    </div>
 
     <!-- Link to Go Back to Main Page -->
     <a href="index.html">Back to Lab Solutions</a>
+
+    <script>
+        function copyToClipboard() {
+            // Get the text from the code snippet
+            var code = document.getElementById("codeSnippet").innerText;
+
+            // Create a temporary textarea element to hold the text
+            var textarea = document.createElement("textarea");
+            textarea.value = code;
+            document.body.appendChild(textarea);
+
+            // Select and copy the text
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                var successful = document.execCommand('copy');
+                if (successful) {
+                    showTooltip();
+                } else {
+                    alert('Copy command was unsuccessful');
+                }
+            } catch (err) {
+                alert('Oops, unable to copy');
+            }
+
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+        }
+
+        function showTooltip() {
+            var tooltip = document.getElementById("tooltipText");
+            tooltip.style.visibility = "visible";
+            tooltip.style.opacity = "1";
+
+            // Hide the tooltip after 2 seconds
+            setTimeout(function() {
+                tooltip.style.visibility = "hidden";
+                tooltip.style.opacity = "0";
+            }, 2000);
+        }
+    </script>
 </body>
 </html>
