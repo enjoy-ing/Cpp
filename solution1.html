@@ -40,7 +40,7 @@
             text-align: left;
             overflow-x: auto; /* Allows horizontal scrolling */
             max-width: 90%;   /* Limit the width of the code box to 90% of the screen */
-            white-space: pre; /* Preserve the formatting of the code */
+            white-space: pre; /* Preserve formatting */
         }
 
         .copy-btn {
@@ -120,7 +120,7 @@
 
         <!-- Code Snippet -->
         <pre id="codeSnippet">
-#include <iostream>
+#include &lt;iostream&gt;
 using namespace std;
 int main(){
     char A[26];
@@ -134,7 +134,7 @@ int main(){
     while(c!='.')
     {
         for(int j=0;j<26;j++) {
-        if(c==A[j]){ N[j]++; 
+        if(c==A[j]){ N[j]++;
         break;  }
         }
         cin>>c;
