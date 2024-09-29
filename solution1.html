@@ -106,18 +106,12 @@
             border-style: solid;
             border-color: #555 transparent transparent transparent;
         }
-
-        /* Show the tooltip when hovering */
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
     </style>
 </head>
 <body>
     <h1>Solution 1</h1>
     <p>
-        Here is the Code. Enjoy! (Do practice and understand them)
+        Here is the COde.
     </p>
 
     <div class="code-container">
@@ -153,7 +147,7 @@ int main(){
 
 console.log(greet('World'));
         </pre>
-        <button class="copy-btn tooltip" onclick="copyToClipboard()">Copy</button>
+        <button class="copy-btn tooltip" onclick="copyToClipboard()">Click to Copy</button>
         <span class="tooltiptext" id="tooltipText">Copied!</span>
     </div>
 
@@ -177,7 +171,7 @@ console.log(greet('World'));
             try {
                 var successful = document.execCommand('copy');
                 if (successful) {
-                    showTooltip();
+                    showTooltip();  // Show "Copied!" after clicking "Click to Copy"
                 } else {
                     alert('Copy command was unsuccessful');
                 }
