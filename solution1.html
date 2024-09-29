@@ -27,8 +27,8 @@
         }
 
         .code-container {
-            position: relative;
             display: inline-block;
+            text-align: left;
             margin-bottom: 20px;
         }
 
@@ -40,12 +40,10 @@
             text-align: left;
             overflow-x: auto;
             max-width: 90%;
+            margin-top: 5px;
         }
 
         .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -53,6 +51,7 @@
             border-radius: 3px;
             cursor: pointer;
             font-size: 14px;
+            margin-bottom: 10px;
         }
 
         .copy-btn:hover {
@@ -111,10 +110,15 @@
 <body>
     <h1>Solution 1</h1>
     <p>
-        Here is the COde.
+        This is the content .
     </p>
 
     <div class="code-container">
+        <!-- Copy Button Outside the Code Box -->
+        <button class="copy-btn tooltip" onclick="copyToClipboard()">Click to Copy</button>
+        <span class="tooltiptext" id="tooltipText">Copied!</span>
+
+        <!-- Code Snippet -->
         <pre id="codeSnippet">
 #include <iostream>
 using namespace std;
@@ -147,8 +151,6 @@ int main(){
 
 console.log(greet('World'));
         </pre>
-        <button class="copy-btn tooltip" onclick="copyToClipboard()">Click to Copy</button>
-        <span class="tooltiptext" id="tooltipText">Copied!</span>
     </div>
 
     <!-- Link to Go Back to Main Page -->
