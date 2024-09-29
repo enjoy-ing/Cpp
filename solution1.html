@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Solution 1</title>
     <style>
         body {
@@ -30,6 +29,8 @@
             display: inline-block;
             text-align: left;
             margin-bottom: 20px;
+            width: 100%;
+            max-width: 90%;
         }
 
         pre {
@@ -38,9 +39,9 @@
             padding: 15px;
             border-radius: 5px;
             text-align: left;
-            overflow-x: auto; /* Allows horizontal scrolling */
-            max-width: 90%;   /* Limit the width of the code box to 90% of the screen */
-            white-space: pre; /* Preserve formatting */
+            overflow: auto; /* Allows both horizontal and vertical scrolling */
+            white-space: pre; /* Preserves formatting */
+            max-width: 100%;  /* The code block takes the full width of the container */
         }
 
         .copy-btn {
@@ -105,81 +106,86 @@
             border-style: solid;
             border-color: #555 transparent transparent transparent;
         }
+
+        /* Show tooltip on button click */
+        .tooltip.active .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <h1>Solution 1</h1>
     <p>
-        This is the content of the first solution page. Below is an example of a code snippet with a "Click to Copy" feature. You can use this functionality to allow users to easily copy code or text.
+        Below is a code snippet with a "Click to Copy" copy the code by clicking the button.
     </p>
 
     <div class="code-container">
-        <!-- Copy Button Outside the Code Box -->
-        <button class="copy-btn tooltip" onclick="copyToClipboard()">Click to Copy</button>
-        <span class="tooltiptext" id="tooltipText">Copied!</span>
+        <button class="copy-btn tooltip" onclick="copyToClipboard()">Click to Copy
+            <span class="tooltiptext" id="tooltipText">Copied!</span>
+        </button>
 
-        <!-- Code Snippet -->
         <pre id="codeSnippet">
 #include &lt;iostream&gt;
 using namespace std;
-int main(){
+
+int main() {
     char A[26];
     int N[26];
-    for(int i=0;i<26;i++)
-    {
-        A[i]='a'+i;
-        N[i]=0;
+
+    for (int i = 0; i < 26; i++) {
+        A[i] = 'a' + i;
+        N[i] = 0;
     }
-    char c; cin>>c;
-    while(c!='.')
-    {
-        for(int j=0;j<26;j++) {
-        if(c==A[j]){ N[j]++;
-        break;  }
+
+    char c;
+    cin >> c;
+
+    while (c != '.') {
+        for (int j = 0; j < 26; j++) {
+            if (c == A[j]) {
+                N[j]++;
+                break;
+            }
         }
-        cin>>c;
+        cin >> c;
     }
-    int max=0;
-    int i;
-    for(i=0;i<26;i++)
-    {
-        if(N[i]>N[max]) max=i;
+
+    int max = 0;
+    for (int i = 0; i < 26; i++) {
+        if (N[i] > N[max]) max = i;
     }
-    cout<<A[max]<<" "<<N[max]<<endl;
+
+    cout << A[max] << " " << N[max] << endl;
     return 0;
 }
         </pre>
     </div>
 
-    <!-- Link to Go Back to Main Page -->
     <a href="index.html">Back to Lab Solutions</a>
 
     <script>
         function copyToClipboard() {
-            // Get the text from the code snippet
             var code = document.getElementById("codeSnippet").innerText;
 
-            // Create a temporary textarea element to hold the text
             var textarea = document.createElement("textarea");
             textarea.value = code;
             document.body.appendChild(textarea);
 
-            // Select and copy the text
             textarea.select();
             textarea.setSelectionRange(0, 99999); // For mobile devices
 
             try {
                 var successful = document.execCommand('copy');
                 if (successful) {
-                    showTooltip();  // Show "Copied!" after clicking "Click to Copy"
+                    showTooltip();
                 } else {
-                    alert('Copy command was unsuccessful');
+                    alert('Unable to copy');
                 }
             } catch (err) {
                 alert('Oops, unable to copy');
             }
 
-            // Remove the temporary textarea
             document.body.removeChild(textarea);
         }
 
@@ -188,7 +194,6 @@ int main(){
             tooltip.style.visibility = "visible";
             tooltip.style.opacity = "1";
 
-            // Hide the tooltip after 2 seconds
             setTimeout(function() {
                 tooltip.style.visibility = "hidden";
                 tooltip.style.opacity = "0";
