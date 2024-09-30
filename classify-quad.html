@@ -131,8 +131,7 @@ int distance(int x1, int y1, int x2, int y2) {
 bool areColinear(int x1, int y1, int x2, int y2, int x3, int y3) {
     return (y2 - y1) * (x3 - x2) == (y3 - y2) * (x2 - x1);
 }
-
-main_program {
+int main(){
     int x1, y1, x2, y2, x3, y3, x4, y4;
     cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
     if (areColinear(x1, y1, x2, y2, x3, y3)||areColinear(x2, y2, x3, y3, x4, y4) ||
