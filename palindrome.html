@@ -126,6 +126,37 @@
 #include &lt;iostream&gt;
 using namespace std;
 
+bool isAlpha(char c) {
+    return (c &gt;= 'a' &amp;&amp; c &lt;= 'z') || (c &gt;= 'A' &amp;&amp; c &lt;= 'Z');
+}
+
+char toLower(char c) {
+    if (c &gt;= 'A' &amp;&amp; c &lt;= 'Z') return c + ('a' - 'A');
+    return c;  
+}
+
+bool isPalindrome(char A[], int first, int last) {
+    if (first &gt;= last) return true;
+    while (first &lt; last &amp;&amp; !isAlpha(A[first])) first++;
+    while (last &gt; first &amp;&amp; !isAlpha(A[last])) last--;
+    if (toLower(A[first]) != toLower(A[last])) return false;
+    return isPalindrome(A, first + 1, last - 1);
+}
+
+int main() {
+    char sentence[100];
+    int N, first, last;
+    cin.getline(sentence, 100);
+    cin &gt;&gt; N;
+    cin &gt;&gt; first &gt;&gt; last;
+    if (isPalindrome(sentence, first, last)) 
+        cout &lt;&lt; "Palindrome" &lt;&lt; endl;
+    else 
+        cout &lt;&lt; "Not a Palindrome" &lt;&lt; endl;
+    
+    cout &lt;&lt; sentence &lt;&lt; endl;
+    return 0;
+}
         </pre>
     </div>
 
