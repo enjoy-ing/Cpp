@@ -124,10 +124,27 @@
 
         <pre id="codeSnippet">
 #include &lt;iostream&gt;
+#include &lt;string&gt;
 using namespace std;
 
-int main() {
+int longestCommonSubsequence(string s1, string s2, int i, int j) {
+    if (i == 0 || j == 0) {
+        return 0;
+    }
+    if (s1[i - 1] == s2[j - 1]) {
+        return 1 + longestCommonSubsequence(s1, s2, i - 1, j - 1);
+    }
+    return max(longestCommonSubsequence(s1, s2, i - 1, j), longestCommonSubsequence(s1, s2, i, j - 1));
+}
 
+int main() {
+    string s1, s2;
+    cin &gt;&gt; s1;
+    cin &gt;&gt; s2;
+    int lcsLength = longestCommonSubsequence(s1, s2, s1.length(), s2.length());
+    cout &lt;&lt; lcsLength &lt;&lt; endl;
+    return 0;
+}
         </pre>
     </div>
 
