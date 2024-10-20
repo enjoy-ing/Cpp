@@ -124,8 +124,152 @@
 
         <pre id="codeSnippet">
 #include &lt;iostream&gt;
+#include &lt;string&gt;
 using namespace std;
 
+struct TrainBogie {
+    string name;      
+    TrainBogie *next; 
+};
+
+TrainBogie *createBogie(const string &bogieName) {
+    TrainBogie *newBogie = new TrainBogie; 
+    newBogie->name = bogieName;            
+    newBogie->next = nullptr;              
+    return newBogie;                
+}
+
+TrainBogie *insertAtBeginning(TrainBogie *head, const string &bogieName) {
+    TrainBogie *newBogie = createBogie(bogieName); 
+    newBogie->next = head;                         
+    return newBogie;                               
+}
+
+TrainBogie* insertAtEnd(TrainBogie* head, const string& bogieName) {
+    TrainBogie* newBogie = createBogie(bogieName); 
+    if (!head) {
+        return newBogie;  
+    }
+    TrainBogie* temp = head;
+    while (temp->next) {  
+        temp = temp->next;
+    }
+    temp->next = newBogie; 
+    return head;           
+}
+
+TrainBogie* deleteAtBeginning(TrainBogie* head) {
+    if (!head) return nullptr; 
+    TrainBogie* temp = head;  
+    head = head->next;   
+    delete temp;               
+    return head;               
+}
+
+TrainBogie *deleteAtEnd(TrainBogie *head) {
+    if (!head)
+        return nullptr; 
+    if (!head->next) {                   
+        delete head;    
+        return nullptr; 
+    }
+    TrainBogie *temp = head; 
+    while (temp->next->next) { 
+        temp = temp->next;
+    }
+    delete temp->next;    
+    temp->next = nullptr; 
+    return head;          
+}
+
+void searchAndAddAfter(TrainBogie* head, const string& existingBogieName, const string& newBogieName) {
+    TrainBogie* temp = head;
+    while (temp) {
+        if (temp->name == existingBogieName) {
+            TrainBogie* newBogie = createBogie(newBogieName);
+            newBogie->next = temp->next; 
+            temp->next = newBogie;
+            return;
+        }
+        temp = temp->next;
+    }
+}
+
+void searchAndDelete(TrainBogie *head, const string &bogieName) {
+    if (!head) return; 
+    if (head->name == bogieName) {                            
+        head = deleteAtBeginning(head); 
+        return;                       
+    }
+    TrainBogie *temp = head; 
+    while (temp->next) { 
+        if (temp->next->name == bogieName) {                                     
+            TrainBogie *toDelete = temp->next; 
+            temp->next = temp->next->next;     
+            delete toDelete;                   
+            return;                            
+        }
+        temp = temp->next; 
+    }
+}
+
+void printList(TrainBogie *head) {
+    if (!head) {
+        cout << "-1" << endl; 
+        return;
+    }
+    TrainBogie *temp = head;
+    while (temp) {                   
+        cout << temp->name; 
+        if (temp->next) {
+            cout << " > "; 
+        }
+        temp = temp->next; 
+    }
+    cout << endl; 
+}
+
+TrainBogie* deleteEntireList(TrainBogie* head) {
+    while (head) {
+        TrainBogie* temp = head;
+        head = head->next; 
+        delete temp;     
+    }
+    return nullptr; 
+}
+
+int main() {
+    int n;
+    cin >> n;              
+    TrainBogie *head = nullptr; 
+    for (int i = 0; i < n; ++i) {
+        int operation;
+        string bogieName1, bogieName2;
+        cin >> operation; 
+        if (operation == 1) { 
+            cin >> bogieName1;
+            head = insertAtBeginning(head, bogieName1);
+        } else if (operation == 2) { 
+            cin >> bogieName1;
+            head = insertAtEnd(head, bogieName1);
+        } else if (operation == 3) { 
+            head = deleteAtBeginning(head);
+        } else if (operation == 4) { 
+            head = deleteAtEnd(head);
+        } else if (operation == 5) { 
+            cin >> bogieName1 >> bogieName2;
+            searchAndAddAfter(head, bogieName1, bogieName2);
+        } else if (operation == 6) { 
+            cin >> bogieName1;
+            searchAndDelete(head, bogieName1);
+        } else if (operation == 7) { 
+            printList(head);
+        } else if (operation == 8) {
+            head = deleteEntireList(head);
+        }
+    }
+    return 0; 
+}
         </pre>
     </div>
 
